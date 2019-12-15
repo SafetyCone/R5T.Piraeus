@@ -15,5 +15,17 @@ namespace R5T.Piraeus
 
             commandBuilder.Append(appendix);
         }
+
+        public static void AppendNameValuePair(this ICommandBuilder commandBuilder, string name, string value)
+        {
+            commandBuilder.Append(name);
+            commandBuilder.Append(value);
+        }
+
+        public static void AppendNamePathValuePair(this ICommandBuilder commandBuilder, string name, string pathValue)
+        {
+            commandBuilder.Append(name);
+            commandBuilder.AppendPath(pathValue);
+        }
     }
 }
