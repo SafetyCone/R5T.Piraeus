@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace R5T.Piraeus
+namespace R5T.Piraeus.Extensions
 {
     public static class ICommandBuilderExtensions
     {
@@ -9,23 +9,33 @@ namespace R5T.Piraeus
         /// Properly quotes a path token.
         /// Surrounds the provided path with quotes in case of spaces in the path.
         /// </summary>
-        public static void AppendPath(this ICommandBuilder commandBuilder, string path)
+        public static ICommandBuilder AppendPath(this ICommandBuilder commandBuilder, string path)
         {
             var appendix = $"\"{path}\"";
 
             commandBuilder.Append(appendix);
+
+            return commandBuilder;
         }
 
-        public static void AppendNameValuePair(this ICommandBuilder commandBuilder, string name, string value)
+        public static ICommandBuilder AppendNameValuePair(this ICommandBuilder commandBuilder, string name, string value)
         {
-            commandBuilder.Append(name);
-            commandBuilder.Append(value);
+            commandBuilder
+                .Append(name)
+                .Append(value)
+                ;
+
+            return commandBuilder;
         }
 
-        public static void AppendNamePathValuePair(this ICommandBuilder commandBuilder, string name, string pathValue)
+        public static ICommandBuilder AppendNamePathValuePair(this ICommandBuilder commandBuilder, string name, string pathValue)
         {
-            commandBuilder.Append(name);
-            commandBuilder.AppendPath(pathValue);
+            commandBuilder
+                .Append(name)
+                .AppendPath(pathValue)
+                ;
+
+            return commandBuilder;
         }
     }
 }
