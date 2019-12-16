@@ -5,7 +5,7 @@ namespace R5T.Piraeus
 {
     public interface ICommandBuilder
     {
-        void Append(string token);
+        ICommandBuilder Append(string token);
         string BuildCommand();
     }
 }
