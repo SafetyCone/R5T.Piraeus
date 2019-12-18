@@ -11,7 +11,13 @@ namespace R5T.Piraeus.Extensions
         /// </summary>
         public static ICommandBuilder AppendPath(this ICommandBuilder commandBuilder, string path)
         {
-            var appendix = $"\"{path}\"";
+            commandBuilder.AppendQuotedValue(path);
+            return commandBuilder;
+        }
+
+        public static ICommandBuilder AppendQuotedValue(this ICommandBuilder commandBuilder, string value)
+        {
+            var appendix = $"\"{value}\"";
 
             commandBuilder.Append(appendix);
 
@@ -28,11 +34,21 @@ namespace R5T.Piraeus.Extensions
             return commandBuilder;
         }
 
-        public static ICommandBuilder AppendNamePathValuePair(this ICommandBuilder commandBuilder, string name, string pathValue)
+        public static ICommandBuilder AppendNamePathValuePair(this ICommandBuilder commandBuilder, string name, string path)
         {
             commandBuilder
                 .Append(name)
-                .AppendPath(pathValue)
+                .AppendPath(path)
+                ;
+
+            return commandBuilder;
+        }
+
+        public static ICommandBuilder AppendNameQuotedValuePair(this ICommandBuilder commandBuilder, string name, string value)
+        {
+            commandBuilder
+                .Append(name)
+                .AppendQuotedValue(value)
                 ;
 
             return commandBuilder;
